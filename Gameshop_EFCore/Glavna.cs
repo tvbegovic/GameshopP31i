@@ -13,11 +13,12 @@ namespace Gameshop_EFCore
 {
 	public partial class Glavna : Form
 	{
+		private readonly MyDbContext context;
 
-		//TODO: Ubaci context u constructor
-		public Glavna()
+		public Glavna(MyDbContext context)
 		{
-			InitializeComponent();			
+			InitializeComponent();
+			this.context = context;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -27,8 +28,7 @@ namespace Gameshop_EFCore
 
 		private void btnKatalog_Click(object sender, EventArgs e)
 		{
-			//TODO: Pošalji context formi lista
-			var igreForma = new IgreLista();
+			var igreForma = new IgreLista(context);
 			igreForma.ShowDialog();
 		}
 	}

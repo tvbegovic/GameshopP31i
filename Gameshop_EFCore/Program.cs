@@ -1,4 +1,5 @@
 using Gameshop_EFCore.Db;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -20,7 +21,10 @@ namespace Gameshop_EFCore
 			var builder = new HostBuilder()
 			  .ConfigureServices((hostContext, services) =>
 			  {
-				  //TODO: Ubaci DbContext u services
+				  services.AddDbContext<MyDbContext>(options =>
+				  {
+					  options.UseSqlServer(Properties.Settings.Default.connString);
+				  });
 				  services.AddSingleton<Glavna>();
 			  });
 

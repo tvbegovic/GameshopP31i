@@ -13,18 +13,17 @@ namespace Gameshop_EFCore
 	public partial class IgreLista : Form
 	{
 		List<Game> igre = new List<Game>();
-		
+		private readonly MyDbContext context;
 
-		//TODO: Ubaci context u constructor
-		public IgreLista()
+		public IgreLista(MyDbContext context)
 		{
 			InitializeComponent();			
-			
+			this.context = context;
 		}
 
 		private void KatalogForma_Load(object sender, EventArgs e)
 		{
-			//TODO: Učitaj sve igre
+			igre = context.Set<Game>().ToList();
 			dgvIgre.DataSource = igre;
 		}
 
@@ -32,8 +31,7 @@ namespace Gameshop_EFCore
 		{
 			if(e.ClickedItem.Name != "tsbObrisi")
 			{
-				//TODO: pošalji context edit formi
-				var editForma = new IgreEdit();
+				var editForma = new IgreEdit(context);
 				if(e.ClickedItem.Name == "tsbUredi")
 				{
 					editForma.Id = Convert.ToInt32(dgvIgre.CurrentRow.Cells[0].Value);
@@ -64,7 +62,10 @@ namespace Gameshop_EFCore
 				var yesno = MessageBox.Show("Obrisati zapis?", "Poruka", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				if(yesno == DialogResult.Yes)
 				{
-					//TODO: Obriši zapis
+					var id = Convert.ToInt32(dgvIgre.CurrentRow.Cells[0].Value);					
+					var igra = context.Set<Game>().FirstOrDefault(g => g.Id == id);
+					context.Set<Game>().Remove(igra);
+					context.SaveChanges();					
 					igre.Remove((Game)dgvIgre.CurrentRow.DataBoundItem);
 					AzurirajGrid();
 				}

@@ -12,11 +12,12 @@ namespace Gameshop_EFCore
 {
 	public partial class IgreEdit : Form
 	{
+		private readonly MyDbContext context;
 
-		//TODO: Ubaci context u constructor
-		public IgreEdit()
+		public IgreEdit(MyDbContext context)
 		{
-			InitializeComponent();						
+			InitializeComponent();			
+			this.context = context;
 		}
 
 		public int Id { get; set; }
@@ -27,7 +28,7 @@ namespace Gameshop_EFCore
 			SetupComboBoxes();
 			if (Id > 0)
 			{
-				//TODO: Učitaj zapis iz baze s tim id-om				
+				Igra = context.Set<Game>().FirstOrDefault(g => g.Id == Id);
 			}
 			else
 			{
@@ -45,18 +46,15 @@ namespace Gameshop_EFCore
 
 		private void SetupComboBoxes()
 		{
-			//TODO: Učitaj kompanije
-			
+			cboDeveloper.DataSource = context.Set<Company>().ToList();
 			cboDeveloper.DisplayMember = "Name";
 			cboDeveloper.ValueMember = "Id";
 			cboDeveloper.FormattingEnabled = true;
-			//TODO: Učitaj kompanije
-
+			cboIzdavac.DataSource = context.Set<Company>().ToList();
 			cboIzdavac.DisplayMember = "Name";
 			cboIzdavac.ValueMember = "Id";
 			cboIzdavac.FormattingEnabled = true;
-			//Učitaj žanrove
-			
+			cboVrsta.DataSource = context.Set<Genre>().ToList();
 			cboVrsta.DisplayMember = "Name";
 			cboVrsta.ValueMember = "Id";
 			cboVrsta.FormattingEnabled = true;
@@ -69,14 +67,13 @@ namespace Gameshop_EFCore
 			{
 				if(Igra.Id > 0)
 				{
-					//TODO: Attach
+					context.Set<Game>().Attach(Igra);
 				}
 				else
 				{
-					//TODO: Add
+					context.Set<Game>().Add(Igra);
 				}
-				//TODO: save changes
-				
+				context.SaveChanges();
 				Id = Igra.Id;
 				DialogResult = DialogResult.OK;
 			}
