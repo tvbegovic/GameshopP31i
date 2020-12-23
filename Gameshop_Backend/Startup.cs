@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gameshop_Backend.Db;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gameshop_Backend
 {
@@ -24,6 +26,9 @@ namespace Gameshop_Backend
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddDbContextPool<MyDbContext>(options =>
+		   options.UseSqlServer(Configuration.GetConnectionString("connString")));
+
 			services.AddControllers();
 		}
 
@@ -34,6 +39,9 @@ namespace Gameshop_Backend
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app.UseDefaultFiles();
+			app.UseStaticFiles();
 
 			app.UseRouting();
 

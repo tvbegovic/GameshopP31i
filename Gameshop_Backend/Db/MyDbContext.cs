@@ -17,6 +17,15 @@ namespace Gameshop_Backend.Db
 
 		}
 
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Genre>().ToTable("Genre");
+			modelBuilder.Entity<Company>().ToTable("Company");
+			modelBuilder.Entity<Game>().ToTable("Game");
+
+			modelBuilder.Entity<Game>().HasOne(g => g.Genre).WithMany().HasForeignKey(g => g.IdGenre);
+		}
+
 
 	}
 }

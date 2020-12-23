@@ -23,6 +23,10 @@ namespace Gameshop_Backend.Db
 		public decimal? Price { get; set; }
 		public int? IdDeveloper { get; set; }
 		public DateTime? ReleaseDate { get; set; }
+
+		public Genre Genre { get; set; }
+		public Company Publisher { get; set; }
+		public Company Developer { get; set; }
 	}
 	public class OrderDetail
 	{
