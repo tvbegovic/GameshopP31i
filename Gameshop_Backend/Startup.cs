@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gameshop_Backend.Db;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Gameshop_Backend
 {
@@ -39,6 +40,23 @@ namespace Gameshop_Backend
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			//Trick to allow refresh of pages inside Angular SPA
+			var angularRoutes = new[] {
+				 "/home",
+				 "/login",
+				 "/admin",
+				 "/cart"
+ };
+			app.Use(async (context, next) =>
+			{
+				if (context.Request.Path.HasValue && null != angularRoutes.FirstOrDefault(
+					(ar) => context.Request.Path.Value.StartsWith(ar, StringComparison.OrdinalIgnoreCase)))
+				{
+					context.Request.Path = new PathString("/");
+				}
+				await next();
+			});
 
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
