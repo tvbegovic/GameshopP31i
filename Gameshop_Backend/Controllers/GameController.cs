@@ -62,5 +62,27 @@ namespace Gameshop_Backend.Controllers
 				Games = context.Games.ToList()
 			};
 		}
+
+		[HttpPost("")]
+		public Game Create(Game game)
+		{
+			context.Games.Add(game);
+			context.SaveChanges();
+			return game;
+		}
+
+		[HttpPut("")]
+		public Game Update(Game game)
+		{
+			context.Games.Update(game);
+			context.SaveChanges();
+			return game;
+		}
+
+		[HttpDelete("{id}")]
+		public void Delete(int id)
+		{
+			context.Database.ExecuteSqlInterpolated($"DELETE FROM Game WHERE id = {id}");
+		}
 	}
 }
