@@ -11,6 +11,7 @@ namespace Gameshop_Backend.Db
 		public DbSet<Genre> Genres { get; set; }
 		public DbSet<Company> Companies { get; set; }
 		public DbSet<Game> Games { get; set; }
+		public DbSet<User> Users { get; set; }
 
 		public MyDbContext(DbContextOptions options) : base(options)
 		{
@@ -22,6 +23,7 @@ namespace Gameshop_Backend.Db
 			modelBuilder.Entity<Genre>().ToTable("Genre");
 			modelBuilder.Entity<Company>().ToTable("Company");
 			modelBuilder.Entity<Game>().ToTable("Game");
+			modelBuilder.Entity<User>().ToTable("User");
 
 			modelBuilder.Entity<Game>().HasOne(g => g.Genre).WithMany().HasForeignKey(g => g.IdGenre);
 			modelBuilder.Entity<Game>().HasOne(g => g.Developer).WithMany().HasForeignKey(g => g.IdDeveloper);
