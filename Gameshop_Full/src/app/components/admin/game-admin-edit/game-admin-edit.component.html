@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <app-header [showCart]="false"></app-header>
+    <h4>Edit game data</h4>
+    <div class="mt-2">
+        <button class="btn btn-success" (click)="save()">Save</button>
+        <button class="btn btn-secondary ml-2" (click)="back()">Go back</button>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4" *ngIf="model">
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" class="form-control" [(ngModel)]="model.game.title">
+            </div>
+            <div class="form-group">
+                <label>Genre:</label>
+                <select class="form-control" [(ngModel)]="model.game.idGenre">
+                    <option *ngFor="let g of model.genres" [value]="g.id">{{g.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Developer:</label>
+                <select class="form-control" [(ngModel)]="model.game.idDeveloper">
+                    <option *ngFor="let c of model.companies" [value]="c.id">{{c.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Publisher:</label>
+                <select class="form-control" [(ngModel)]="model.game.idPublisher">
+                    <option *ngFor="let c of model.companies" [value]="c.id">{{c.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Price:</label>
+                <input type="text" class="form-control" [(ngModel)]="model.game.price">
+            </div>
+            <div class="form-group">
+                <label>Release date:</label>
+                <input type="text" class="form-control" bsDatepicker [(ngModel)]="model.game.releaseDate">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                
+                <app-fileupload [cssClass]="'mt-2 mb-2'" [options]="uploaderOptions" (UploaderEvent)="onUploadEvent($event)"></app-fileupload>
+            </div>
+            <div>
+                <img [src]="getImageUrl()" *ngIf="getImageUrl()">
+            </div>
+        </div>
+    </div>
+    
+</div>

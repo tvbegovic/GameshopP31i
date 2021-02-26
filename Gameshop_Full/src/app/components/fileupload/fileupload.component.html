@@ -1,0 +1,6 @@
+<div [ngClass]="cssClass">
+  <input #inp type="file" style="display: none;" [multiple]="options.multiple" ngFileSelect [uploadInput]="uploadInput"
+  [options]="uploaderOptions" (uploadOutput)="onUploadOutput($event)">
+  <button [ngClass]="options.buttonCss" type="button" (click)="start()">{{options.buttonText}}</button>
+</div>
+

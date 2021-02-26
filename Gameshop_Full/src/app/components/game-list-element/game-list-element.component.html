@@ -1,0 +1,18 @@
+<div class="game_element">
+    <div class="imageHolder" [style]="getImageUrlBg(game)">
+        <a href="#"><!-- <img [src]="getImageUrl(game)"> --></a>
+    </div>    
+    <div class="title">
+            <a href="#">{{game.title}}</a>
+    </div>
+    <div class="pricecart mb-2">
+        <div class="price">
+            €{{game.price}}
+        </div>
+        <div class="cart ml-2 mr-2">
+            <a (click)="addToCart()" style="cursor: pointer;"><img src="assets/cart-add-icon.png"></a>
+        </div>
+    </div>
+    
+    
+</div>

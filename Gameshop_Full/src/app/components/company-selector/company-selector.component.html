@@ -1,0 +1,10 @@
+<div class="card mt-4">
+    <div class="card-header header">Developer / Izdavač</div>
+    <div class="card-body">
+       
+       <div class="item" *ngFor="let c of companies">
+           <a style="cursor: pointer;" (click)="onCompanySelected(c)">{{c.name}}</a>
+       </div>       
+       
+    </div>
+</div>

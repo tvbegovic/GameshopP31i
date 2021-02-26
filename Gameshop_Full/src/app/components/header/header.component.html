@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-between">
+    <a [routerLink]="''"><img src="assets/logo.png" style="width: 400px;"></a>
+    <div class="d-flex">
+        <app-cart-indicator *ngIf="showCart"></app-cart-indicator>
+        <app-login-info></app-login-info>
+    </div>
+    
+</div>
+

@@ -1,0 +1,9 @@
+.holder {
+    position: relative;
+}
+.counter {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-weight: bold;
+}

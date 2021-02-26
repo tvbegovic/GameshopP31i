@@ -1,0 +1,17 @@
+<div class="container">
+    <app-header></app-header>
+    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    <app-search-bar (SearchActivated)="onSearch($event)"></app-search-bar>
+    <div class="main">
+        <div class="sidebar">
+            <app-genre-selector *ngIf="homeModel" [genres]="homeModel.genres" (GenreSelected)="onGenreSelected($event)">
+            </app-genre-selector>
+            <div class="mt-2">
+                <app-company-selector *ngIf="homeModel" [companies]="homeModel.companies" (CompanySelected)="onCompanySelected($event)"></app-company-selector>
+            </div>
+        </div>
+        <div class="content mt-4">
+            <app-game-list *ngIf="games" [games]="games"></app-game-list>
+        </div>
+    </div>
+</div> 

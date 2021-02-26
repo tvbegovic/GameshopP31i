@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+.main {
+    display: flex;
+}
+.sidebar {
+    width: 20%
+}
+.content {
+    width: 80%;
+    margin-left: 30px;    
+    background-color: #DDD;    
+}

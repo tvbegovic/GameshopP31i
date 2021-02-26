@@ -1,0 +1,48 @@
+<div class="container">
+    <app-header></app-header>
+    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div> 
+    <h4 class="mt-2">Your shopping cart</h4>
+    <div class="mt-2 row">
+        <div class="col-sm-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th style="width: 40%">Game</th>
+                        <th>Price</th>
+                        <th style="width:15%">Qty</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of items, let ix=index">
+                        <td>{{ix+1}}.</td>
+                        <td>{{i.game.title}}</td>
+                        <td>{{i.game.price}}</td>
+                        <td><input type="number" class="form-control" [(ngModel)]="i.qty" min="1" (change)="onQtyChanged(i)"></td>
+                        <td>{{i.game.price! * i.qty}}</td>
+                        <td><button class="btn btn-sm btn-danger" (click)="removeItem(i)">Remove</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right">Total:</td>
+                        <td>{{getTotal() | number}}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <ng-container *ngIf="items.length > 0">
+                <h5>Customer info</h5>
+                <app-user-edit [user]="user"></app-user-edit>
+                <div class="mt-2">
+                    <button class="btn btn-lg btn-success" (click)="order()">Finish order</button>
+                </div>
+            </ng-container>            
+        </div>
+    </div>
+</div>
